@@ -1,0 +1,20 @@
+<!-- Navbar -->
+<nav>
+    <div class="container" fxLayout="row" fxLayoutAlign="space-between center">  
+        <!-- Brand --> 
+        <span id="brand" routerLink="signup">
+            <h1>{{ brandText }}</h1>
+        </span>     
+
+        <!-- Profile Icon Menu -->
+        <button id="userProfileIcon" mat-icon-button [mat-menu-trigger-for]="menu">
+            <mat-icon style="height: 100%; width: auto">account_circle</mat-icon>
+        </button>
+        <mat-menu #menu>
+            <button mat-menu-item routerLink="/signup">Subscription Signup</button>
+        </mat-menu>
+    </div>
+</nav>
+
+<!-- Body -->
+<router-outlet></router-outlet>

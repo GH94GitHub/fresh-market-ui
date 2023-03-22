@@ -1,0 +1,29 @@
+nav {
+    background-color: gainsboro;
+
+    .container {
+        height: var(--nav-height);
+
+        * {
+            margin: 0 5px;
+        }
+
+        #brand {
+            h1 {
+                margin: 0;
+            }
+        }
+
+        button#userProfileIcon {
+            padding: 0px;
+    
+            .mat-icon {
+                font-size: var(--nav-icon-lg);
+                height: auto !important;
+                width: auto !important;
+                max-width: 100% !important;
+                max-height: 100% !important;
+            }
+        }
+    }
+}

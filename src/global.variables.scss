@@ -1,0 +1,8 @@
+:root {
+    --nav-height: 48px;
+
+    --nav-icon-sm: 25px;
+    --nav-icon-lg: 38px;
+
+    --body-height: calc(100vh - var(--nav-height));
+}
