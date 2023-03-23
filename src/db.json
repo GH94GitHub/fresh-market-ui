@@ -1,87 +1,72 @@
 {
-    "tiers": [
+  "tiers": [
+    {
+      "tierLevel": 1,
+      "price": 40.0,
+      "dishCount": 2
+    },
+    {
+      "tierLevel": 2,
+      "price": 75.0,
+      "dishCount": 3
+    },
+    {
+      "tierLevel": 3,
+      "price": 100.0,
+      "dishCount": 4
+    }
+  ],
+  "dishes": [
+    {
+      "dishId": 1,
+      "name": "Avocado",
+      "description": "Green fruit that has a huge seed in the middle",
+      "calorieAmount": 400,
+      "imgUrl": "#",
+      "allergies": [
         {
-            "tierLevel": 1, 
-            "price": 40.00,
-            "dishCount": 2
-        },
-        {
-            "tierLevel": 2, 
-            "price": 75.00,
-            "dishCount": 3
-        },
-        {
-            "tierLevel": 3, 
-            "price": 100.00,
-            "dishCount": 4
+          "allergyId": 2,
+          "name": "Avocado"
         }
-    ],
-    "dishes": [
-        {
-            "dishId": 1,
-            "name": "Avocado", 
-            "description": "Green fruit that has a huge seed in the middle", 
-            "calorieAmount": 400, 
-            "imgUrl": "#",
-            "allergies": [
-                {
-                    "allergyId": 0,
-                    "name": "placeholder"
-                }
-            ]
-        },
-        {
-            "dishId": 2,
-            "name": "Green Leaf Lettuce", 
-            "description": "Make a salad", 
-            "calorieAmount": 20, 
-            "imgUrl": "#",
-            "allergies": [
-                {
-                    "allergyId": 0,
-                    "name": "placeholder"
-                }
-            ]
-        },
-        {
-            "dishId": 3,
-            "name": "Strawberry", 
-            "description": "Dip it in some chocolate", 
-            "calorieAmount": 50, 
-            "imgUrl": "#",
-            "allergies": [
-                {
-                    "allergyId": 0,
-                    "name": "placeholder"
-                }
-            ]
-        },
-        {
-            "dishId": 4,
-            "name": "Banana", 
-            "description": "Need your potassium", 
-            "calorieAmount": 100, 
-            "imgUrl": "#",
-            "allergies": [
-                {
-                    "allergyId": 0,
-                    "name": "placeholder"
-                }
-            ]
-        }
-    ],
-    "allergies": [
-        {
-            "allergyId": 1,
-            "name": "Peanut"
-        },
-        {
-            "allergyId": 2,
-            "name": "Avocado"
-        },
-        {
-            "allergyId": 3,
-            "name": "Shellfish"
-        }
-    ]
+      ]
+    },
+    {
+      "dishId": 2,
+      "name": "Green Leaf Lettuce",
+      "description": "Make a salad",
+      "calorieAmount": 20,
+      "imgUrl": "#",
+      "allergies": []
+    },
+    {
+      "dishId": 3,
+      "name": "Strawberry",
+      "description": "Dip it in some chocolate",
+      "calorieAmount": 50,
+      "imgUrl": "#",
+      "allergies": []
+    },
+    {
+      "dishId": 4,
+      "name": "Banana",
+      "description": "Need your potassium",
+      "calorieAmount": 100,
+      "imgUrl": "#",
+      "allergies": []
+    }
+  ],
+  "allergies": [
+    {
+      "allergyId": 1,
+      "name": "Peanut"
+    },
+    {
+      "allergyId": 2,
+      "name": "Avocado"
+    },
+    {
+      "allergyId": 3,
+      "name": "Shellfish"
+    }
+  ]
 }

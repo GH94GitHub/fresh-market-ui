@@ -1,5 +1,108 @@
 <div id="pageContainer">
-    <div>
-        form
-    </div>
+  <button (click)="log()">Log</button>
+  <mat-stepper orientation="vertical" [linear]="false" #stepper>
+    <!-- Info -->
+    <mat-step [stepControl]="infoFormGroup">
+      <form [formGroup]="infoFormGroup">
+        <ng-template matStepLabel>Fill out your info</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Name</mat-label>
+          <input
+            matInput
+            placeholder="Last name, First name"
+            formControlName="name"
+            required
+          />
+        </mat-form-field>
+
+        <!-- Address -->
+        <mat-form-field appearance="fill">
+          <mat-label>Address</mat-label>
+          <input
+            matInput
+            placeholder="Enter your address"
+            formControlName="address"
+            required
+          />
+        </mat-form-field>
+
+        <!-- Phone Number -->
+        <mat-form-field appearance="fill">
+          <mat-label>Phone Number</mat-label>
+          <input
+            matInput
+            placeholder="Enter your phone #"
+            formControlName="phoneNumber"
+          />
+        </mat-form-field>
+
+        <!-- Allergies -->
+        <mat-form-field appearance="fill">
+          <mat-label>Allergies</mat-label>
+          <mat-select formControlName="allergies" placeholder="None" multiple>
+            <mat-option
+              *ngFor="let allergy of allergies"
+              [value]="allergy.name"
+              >{{ allergy.name }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+
+        <div>
+          <button mat-button (click)="showDishStep()">Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- Step 2 -->
+    <mat-step [stepControl]="dishesFormGroup">
+      <form [formGroup]="dishesFormGroup">
+        <ng-template matStepLabel>Select Dishes</ng-template>
+
+        <!-- Dish Option-->
+        <mat-checkbox
+          class="dishCheckBox"
+          *ngFor="let dish of dishes"
+          formControlName="{{ dish.name + dish.dishId }}"
+          >{{ dish.name }}</mat-checkbox
+        >
+
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- Step 3 -->
+    <mat-step>
+      <ng-template matStepLabel>Register</ng-template>
+      <!-- Email -->
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          placeholder="Enter your email"
+          formControlName="email"
+          required
+        />
+      </mat-form-field>
+
+      <!-- Password -->
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          placeholder="Enter your password"
+          type="password"
+          formControlName="password"
+          required
+        />
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
 </div>
