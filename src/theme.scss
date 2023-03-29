@@ -1,0 +1,36 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$typography: mat.define-typography-config();
+
+$green-yellow-theme: mat.define-light-theme((
+  color: (
+    // default, lighter, darker, text
+    primary: mat.define-palette(mat.$light-green-palette, 500, 200, 700, 900),
+    accent: mat.define-palette(mat.$lime-palette, 500, 200, 700, 900),
+    warn: mat.define-palette(mat.$deep-orange-palette, A700)),
+  typography: $typography,
+  density: 0,
+));
+
+$form-field-theme: mat.define-light-theme((
+  color: (
+    primary: mat.define-palette(mat.$light-green-palette, 900),
+    accent: mat.define-palette(mat.$lime-palette, 500, 200, 700, 900),
+    warn: mat.define-palette(mat.$deep-orange-palette, A700)),
+  typography: $typography,
+  density: 0
+));
+
+@include mat.all-component-typographies($green-yellow-theme);
+@include mat.icon-button-theme($green-yellow-theme);
+@include mat.icon-theme($green-yellow-theme);
+@include mat.input-theme($green-yellow-theme);
+@include mat.menu-theme($green-yellow-theme);
+@include mat.button-theme($green-yellow-theme);
+@include mat.stepper-theme($green-yellow-theme);
+@include mat.card-theme($green-yellow-theme);
+@include mat.form-field-theme($form-field-theme);
+@include mat.select-theme($green-yellow-theme);
+@include mat.checkbox-theme($green-yellow-theme);

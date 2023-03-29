@@ -22,6 +22,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { SelectnumbersComponent } from './shared/components/selectnumbers/selectnumbers.component';
+import { NumberOptionComponent } from './shared/components/selectnumbers/number-option/number-option.component';
 
 
 const materialModules = [
@@ -31,7 +33,6 @@ const materialModules = [
   MatStepperModule,
   MatCardModule,
   MatFormFieldModule,
-  ReactiveFormsModule,
   MatInputModule,
   MatSelectModule,
   MatCheckboxModule
@@ -45,13 +46,16 @@ const materialModules = [
     LoginComponent,
     BaseLayoutComponent,
     AuthLayoutComponent,
-    SmallDishDetailsComponent
+    SmallDishDetailsComponent,
+    SelectnumbersComponent,
+    NumberOptionComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
+    ReactiveFormsModule,
     HttpClientModule,
     ...materialModules
   ],

@@ -29,28 +29,29 @@ export class SubscriptionSignUpComponent implements OnInit {
     ) {}
 
   ngOnInit(): void {
+    // Forms Init
     this.infoFormGroup = this.fb.group({
       name: ['', Validators.required],
       address: ['', Validators.required],
       phoneNumber: [''],
       allergies: ['']
     });
-
-    this.allergyService.getAllergies().subscribe((r: Allergy[]) => {
-      this.allergies=r;
-    });
-
+      // Add Dish form controls
+    this.dishesFormGroup = this.fb.group({});
     this.dishService.getAll().subscribe((r: Dish[]) => {
-      this.dishesFormGroup = this.fb.group({});
       for(let dish of r) {
         this.dishesFormGroup.addControl(dish.name+dish.dishId, new FormControl(''));
       }
       this.dishes=r;
     });
-
     this.credentialsFormGroup = this.fb.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.required]
+    });
+
+    // Allergies dropdown
+    this.allergyService.getAllergies().subscribe((r: Allergy[]) => {
+      this.allergies=r;
     });
   }
 
@@ -78,9 +79,11 @@ export class SubscriptionSignUpComponent implements OnInit {
     this.stepper.next();
   }
 
-  log():void {
-    console.log("infoFormGroup.controls", this.infoFormGroup.controls);
-    console.log("dishesFormGroup.controls", this.dishesFormGroup.controls);
+  changeServing(num: number): void {
+    console.log("Serving changed to ", num);
   }
 
+  changeMealsPW(num: number): void {
+    console.log("Meals per week changed to ", num);
+  }
 }

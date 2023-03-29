@@ -1,0 +1,16 @@
+@use '@angular/material/theming' as theme;
+
+button.option {
+  border: 1px solid black;
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background-color: theme.get-color();
+  }
+}

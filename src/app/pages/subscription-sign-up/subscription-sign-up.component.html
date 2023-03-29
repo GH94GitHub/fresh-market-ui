@@ -1,5 +1,4 @@
 <div id="pageContainer">
-  <button (click)="log()">Log</button>
   <mat-stepper orientation="vertical" [linear]="false" #stepper>
     <!-- Info -->
     <mat-step [stepControl]="infoFormGroup">
@@ -49,56 +48,71 @@
         </mat-form-field>
 
         <div>
-          <button mat-button (click)="showDishStep()">Next</button>
+          <button mat-raised-button color="accent" (click)="showDishStep()">Next</button>
         </div>
       </form>
     </mat-step>
 
     <!-- Step 2 -->
     <mat-step [stepControl]="dishesFormGroup">
-      <form [formGroup]="dishesFormGroup">
-        <ng-template matStepLabel>Select Dishes</ng-template>
+      <ng-template matStepLabel>Select Dishes</ng-template>
+      <h2>Serving</h2>
+      <app-selectnumbers
+      [range]="[2, 3, 4]"
+        (selectionChange)="changeServing($event)"
+        ></app-selectnumbers>
+        <h2>Choose number of meals per week</h2>
+        <app-selectnumbers
+        [range]="[2, 3, 4]"
+        (selectionChange)="changeMealsPW($event)"
+        ></app-selectnumbers>
 
-        <!-- Dish Option-->
-        <mat-checkbox
-          class="dishCheckBox"
-          *ngFor="let dish of dishes"
-          formControlName="{{ dish.name + dish.dishId }}"
-          >{{ dish.name }}</mat-checkbox
-        >
+        <h2>SELECT DISHES</h2>
+        <form [formGroup]="dishesFormGroup">
+          <!-- Dish Option-->
+          <span *ngFor="let dish of dishes">
+            <mat-checkbox
+              class="dishCheckBox"
+              formControlName="{{ dish.name + dish.dishId }}">
+              {{ dish.name }}
+            </mat-checkbox>
+          </span>
+        </form>
 
         <div>
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button matStepperNext>Next</button>
         </div>
-      </form>
     </mat-step>
 
     <!-- Step 3 -->
     <mat-step>
       <ng-template matStepLabel>Register</ng-template>
-      <!-- Email -->
-      <mat-form-field appearance="fill">
-        <mat-label>Email</mat-label>
-        <input
-          matInput
-          placeholder="Enter your email"
-          formControlName="email"
-          required
-        />
-      </mat-form-field>
+      <form [formGroup]="credentialsFormGroup">
+        <!-- Email -->
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            placeholder="Enter your email"
+            formControlName="email"
+            required
+          />
+        </mat-form-field>
 
-      <!-- Password -->
-      <mat-form-field appearance="fill">
-        <mat-label>Password</mat-label>
-        <input
-          matInput
-          placeholder="Enter your password"
-          type="password"
-          formControlName="password"
-          required
-        />
-      </mat-form-field>
+        <!-- Password -->
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            placeholder="Enter your password"
+            type="password"
+            formControlName="password"
+            required
+          />
+        </mat-form-field>
+        <button mat-button type="submit">Checkout</button>
+      </form>
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button (click)="stepper.reset()">Reset</button>

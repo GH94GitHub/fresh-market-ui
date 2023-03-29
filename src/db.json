@@ -1,16 +1,19 @@
 {
   "tiers": [
     {
+      "tierId": 1,
       "tierLevel": 1,
       "price": 40.0,
       "dishCount": 2
     },
     {
+      "tierId": 2,
       "tierLevel": 2,
       "price": 75.0,
       "dishCount": 3
     },
     {
+      "tierId": 3,
       "tierLevel": 3,
       "price": 100.0,
       "dishCount": 4
@@ -67,6 +70,52 @@
     {
       "allergyId": 3,
       "name": "Shellfish"
+    }
+  ],
+  "users": [
+    {
+      "userId": 1,
+      "firstName": "Tony",
+      "lastName": "Henderson",
+      "password": "password",
+      "email": "myemail@email.com",
+      "address": "1501 Badlands Str",
+      "phoneNumber": "4044009191",
+      "dishPreferences": [
+        {
+          "dishId": 1,
+          "name": "Avocado",
+          "description": "Green fruit that has a huge seed in the middle",
+          "calorieAmount": 400,
+          "imgUrl": "#"
+        },
+        {
+          "dishId": 3,
+          "name": "Strawberry",
+          "description": "Dip it in some chocolate",
+          "calorieAmount": 50,
+          "imgUrl": "#"
+        }
+      ],
+      "allergies": [
+        {
+          "allergyId": 1,
+          "name": "Peanut"
+        },
+        {
+          "allergyId": 3,
+          "name": "Shellfish"
+        }
+      ],
+      "subscription": {
+        "expirationDate": "10/04/2020",
+        "tier": {
+          "tierLevel": "ONE",
+          "price": 40.0,
+          "dishCount": "TWO",
+          "id": 1
+        }
+      }
     }
   ]
 }
