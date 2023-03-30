@@ -24,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SelectnumbersComponent } from './shared/components/selectnumbers/selectnumbers.component';
 import { NumberOptionComponent } from './shared/components/selectnumbers/number-option/number-option.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 
 const materialModules = [
@@ -35,7 +36,8 @@ const materialModules = [
   MatFormFieldModule,
   MatInputModule,
   MatSelectModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatRadioModule
 ]
 
 @NgModule({

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, Renderer2, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-selectnumbers',
@@ -17,12 +17,30 @@ export class SelectnumbersComponent implements OnInit {
   }
 
   @Output("selectionChange") selectionChange = new EventEmitter<number>();
+
+  constructor(private renderer: Renderer2) {}
+
   ngOnInit(): void {
-    this.selectionChange.emit(2);
+    //default value todo: change
+    this.changeSelection(2);
   }
 
   changeSelection(num: number): void {
     this.selectionChange.emit(num);
   }
 
+  optionClicked(event: MouseEvent, num: number): void {
+    // remove selected from previous
+    let container: HTMLElement = (event.target as HTMLElement).parentElement!.parentElement!.parentElement!;
+    let selected: HTMLElement|null = container.querySelector('.selected');
+
+    if(selected!=null){
+      this.renderer.removeClass(selected, 'selected');
+    }
+
+    // Mark current selected and emit new value
+    let newSelection = (event.target as HTMLElement).parentElement!.parentElement;
+    this.renderer.addClass(newSelection, 'selected');
+    this.changeSelection(num);
+  }
 }

@@ -1,3 +1,5 @@
 <div class="container">
-  <app-number-option *ngFor="let num of range" [value]="num"></app-number-option>
+  <span *ngFor="let num of range">
+    <app-number-option (click)="optionClicked($event, num)" [value]="num"></app-number-option>
+  </span>
 </div>

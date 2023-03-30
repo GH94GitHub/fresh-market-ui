@@ -1,4 +1,6 @@
-@use '@angular/material/theming' as theme;
+@use '@angular/material/theming' as mat;
+@use '/src/mixins.scss' as mixins;
+@use 'sass:map';
 
 button.option {
   border: 1px solid black;
@@ -10,7 +12,9 @@ button.option {
   justify-content: center;
   align-items: center;
 
-  &:hover {
-    background-color: theme.get-color();
-  }
+  @include mixins.hover-theme();
+}
+
+.selected button.option {
+  @include mixins.primary-background(500);
 }
