@@ -6,3 +6,12 @@
 #pageContainer {
     height: var(--body-height);
 }
+
+mat-form-field {
+  min-width: 200px;
+  max-width: 500px;
+}
+
+div.formContainerOffset {
+  width: 50px;
+}
