@@ -3,6 +3,11 @@
     width: 100%;
 }
 
+mat-stepper {
+  margin-left: 100px;
+  margin-top: 60px;
+}
+
 #pageContainer {
     height: var(--body-height);
 }
@@ -14,4 +19,13 @@ mat-form-field {
 
 div.formContainerOffset {
   width: 50px;
+}
+
+.step-content {
+  padding-top: 15px !important;
+  margin-left: 100px;
+
+  & section {
+    margin-bottom: 20px;
+  }
 }

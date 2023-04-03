@@ -22,40 +22,50 @@
   "dishes": [
     {
       "dishId": 1,
-      "name": "Avocado",
-      "description": "Green fruit that has a huge seed in the middle",
-      "calorieAmount": 400,
-      "imgUrl": "#",
+      "name": "Bavette Steak & Roasted Garlic Sauce ",
+      "description": "Served with mashed potatoes and asparagus",
+      "calorieAmount": 800,
+      "imgUrl": "images/bavette_steak.jpg",
       "allergies": [
         {
           "allergyId": 2,
-          "name": "Avocado"
+          "name": "Milk"
         }
       ]
     },
     {
       "dishId": 2,
-      "name": "Green Leaf Lettuce",
-      "description": "Make a salad",
-      "calorieAmount": 20,
-      "imgUrl": "#",
-      "allergies": []
+      "name": "Honey Garlic Butter Shrimp & Broccoli",
+      "description": "A delicious honey sauce that coats the shrimp and broccoli beautifully. With hints of garlic and ginger.  Comes together in 20 minutes. ",
+      "calorieAmount": 370,
+      "imgUrl": "images/honey_garlic_butter_shrimp.jpg",
+      "allergies": [
+        {
+          "allergyId": 3,
+          "name": "Shellfish"
+        },
+        {
+          "allergyId": 4,
+          "name": "Soy"
+        }
+      ]
     },
     {
       "dishId": 3,
-      "name": "Strawberry",
-      "description": "Dip it in some chocolate",
-      "calorieAmount": 50,
-      "imgUrl": "#",
-      "allergies": []
-    },
-    {
-      "dishId": 4,
-      "name": "Banana",
-      "description": "Need your potassium",
-      "calorieAmount": 100,
-      "imgUrl": "#",
-      "allergies": []
+      "name": "Creamy Chive Salmon",
+      "description": "Served with roasted potato Wedges & Lemony Zucchini",
+      "calorieAmount": 750,
+      "imgUrl": "images/creamy_chive_salmon.jpg",
+      "allergies": [
+        {
+          "allergyId": 2,
+          "name": "Milk"
+        },
+        {
+          "allergyId": 5,
+          "name": "Fish"
+        }
+      ]
     }
   ],
   "allergies": [
@@ -65,11 +75,19 @@
     },
     {
       "allergyId": 2,
-      "name": "Avocado"
+      "name": "Milk"
     },
     {
       "allergyId": 3,
       "name": "Shellfish"
+    },
+    {
+      "allergyId": 4,
+      "name": "Soy"
+    },
+    {
+      "allergyId": 5,
+      "name": "Fish"
     }
   ],
   "users": [
@@ -84,17 +102,17 @@
       "dishPreferences": [
         {
           "dishId": 1,
-          "name": "Avocado",
-          "description": "Green fruit that has a huge seed in the middle",
-          "calorieAmount": 400,
-          "imgUrl": "#"
+          "name": "Bavette Steak & Roasted Garlic Sauce ",
+          "description": "Served with mashed potatoes and asparagus",
+          "calorieAmount": 800,
+          "imgUrl": "images/bavette_steak.jpg"
         },
         {
           "dishId": 3,
-          "name": "Strawberry",
-          "description": "Dip it in some chocolate",
-          "calorieAmount": 50,
-          "imgUrl": "#"
+          "name": "Creamy Chive Salmon",
+          "description": "Served with roasted potato Wedges & Lemony Zucchini",
+          "calorieAmount": 750,
+          "imgUrl": "images/creamy_chive_salmon.jpg"
         }
       ],
       "allergies": [

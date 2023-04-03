@@ -25,6 +25,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SelectnumbersComponent } from './shared/components/selectnumbers/selectnumbers.component';
 import { NumberOptionComponent } from './shared/components/selectnumbers/number-option/number-option.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { DishCheckListComponent } from './shared/components/dish-check-list/dish-check-list.component';
 
 
 const materialModules = [
@@ -50,7 +51,8 @@ const materialModules = [
     AuthLayoutComponent,
     SmallDishDetailsComponent,
     SelectnumbersComponent,
-    NumberOptionComponent
+    NumberOptionComponent,
+    DishCheckListComponent
   ],
   imports: [
     BrowserModule,
