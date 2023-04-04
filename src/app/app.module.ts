@@ -1,6 +1,3 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
@@ -17,16 +14,17 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { SmallDishDetailsComponent } from './shared/small-dish-details/small-dish-details.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { HttpClientModule } from '@angular/common/http';
-import { MatCheckBoxModule } from '@angular/material/check';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SelectnumbersComponent } from './shared/components/selectnumbers/selectnumbers.component';
 import { NumberOptionComponent } from './shared/components/selectnumbers/number-option/number-option.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { DishCheckListComponent } from './shared/components/dish-check-list/dish-check-list.component';
-
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const materialModules = [
   MatIconModule,
@@ -37,7 +35,7 @@ const materialModules = [
   MatFormFieldModule,
   MatInputModule,
   MatSelectModule,
-  MatCheckBoxModule,
+  MatCheckboxModule,
   MatRadioModule
 ]
 
@@ -65,7 +63,8 @@ const materialModules = [
   ],
   exports: [
     ...materialModules,
-    AppRoutingModule  ],
+    AppRoutingModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
