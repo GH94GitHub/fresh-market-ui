@@ -21,7 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { HttpClientModule } from '@angular/common/http';
-import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCheckBoxModule } from '@angular/material/check';
 import { SelectnumbersComponent } from './shared/components/selectnumbers/selectnumbers.component';
 import { NumberOptionComponent } from './shared/components/selectnumbers/number-option/number-option.component';
 import { MatRadioModule } from '@angular/material/radio';
@@ -37,7 +37,7 @@ const materialModules = [
   MatFormFieldModule,
   MatInputModule,
   MatSelectModule,
-  MatCheckboxModule,
+  MatCheckBoxModule,
   MatRadioModule
 ]
 
@@ -64,8 +64,8 @@ const materialModules = [
     ...materialModules
   ],
   exports: [
-    ...materialModules
-  ],
+    ...materialModules,
+    AppRoutingModule  ],
   providers: [],
   bootstrap: [AppComponent]
 })
