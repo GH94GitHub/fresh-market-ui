@@ -3,7 +3,7 @@
     <!-- Info -->
     <mat-step [stepControl]="infoFormGroup">
       <ng-template matStepLabel>Fill out your info</ng-template>
-      <div class="step-content" fxLayout="column" fxLayoutGap="10px" style="max-width: 500px;">
+      <div class="step-content">
         <form [formGroup]="infoFormGroup" fxLayout="column" fxLayoutGap="15px" >
 
           <!-- Name -->
@@ -56,6 +56,7 @@
             </mat-select>
           </mat-form-field>
         </form>
+        <br>
         <div fxLayoutAlign="end">
           <button mat-raised-button color="accent" (click)="showDishStep()">Next</button>
         </div>
