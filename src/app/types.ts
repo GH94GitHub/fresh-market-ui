@@ -33,5 +33,6 @@ export interface Dish {
   description: string,
   calorieAmount: number,
   imgUrl: string,
+  category: string,
   allergies: Allergy[]
 }

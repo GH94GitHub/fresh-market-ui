@@ -26,6 +26,7 @@
       "description": "Served with mashed potatoes and asparagus",
       "calorieAmount": 800,
       "imgUrl": "images/bavette_steak.jpg",
+      "category": "Dinner",
       "allergies": [
         {
           "allergyId": 2,
@@ -39,6 +40,7 @@
       "description": "A delicious honey sauce that coats the shrimp and broccoli beautifully. With hints of garlic and ginger.  Comes together in 20 minutes. ",
       "calorieAmount": 370,
       "imgUrl": "images/honey_garlic_butter_shrimp.jpg",
+      "category": "Dinner",
       "allergies": [
         {
           "allergyId": 3,
@@ -56,6 +58,7 @@
       "description": "Served with roasted potato Wedges & Lemony Zucchini",
       "calorieAmount": 750,
       "imgUrl": "images/creamy_chive_salmon.jpg",
+      "category": "Dinner",
       "allergies": [
         {
           "allergyId": 2,
@@ -105,14 +108,16 @@
           "name": "Bavette Steak & Roasted Garlic Sauce ",
           "description": "Served with mashed potatoes and asparagus",
           "calorieAmount": 800,
-          "imgUrl": "images/bavette_steak.jpg"
+          "imgUrl": "images/bavette_steak.jpg",
+          "category": "Dinner"
         },
         {
           "dishId": 3,
           "name": "Creamy Chive Salmon",
           "description": "Served with roasted potato Wedges & Lemony Zucchini",
           "calorieAmount": 750,
-          "imgUrl": "images/creamy_chive_salmon.jpg"
+          "imgUrl": "images/creamy_chive_salmon.jpg",
+          "category": "Dinner"
         }
       ],
       "allergies": [
