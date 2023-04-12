@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DishCheckListComponent } from './dish-check-list.component';
+import { DishCheckBoxComponent } from './dish-check-box.component';
 
-describe('DishCheckListComponent', () => {
-  let component: DishCheckListComponent;
-  let fixture: ComponentFixture<DishCheckListComponent>;
+describe('DishCheckBoxComponent', () => {
+  let component: DishCheckBoxComponent;
+  let fixture: ComponentFixture<DishCheckBoxComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DishCheckListComponent ]
+      declarations: [ DishCheckBoxComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DishCheckListComponent);
+    fixture = TestBed.createComponent(DishCheckBoxComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

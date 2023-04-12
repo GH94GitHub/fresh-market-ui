@@ -20,11 +20,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SelectnumbersComponent } from './shared/components/selectnumbers/selectnumbers.component';
 import { NumberOptionComponent } from './shared/components/selectnumbers/number-option/number-option.component';
 import { MatRadioModule } from '@angular/material/radio';
-import { DishCheckListComponent } from './shared/components/dish-check-list/dish-check-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DishCheckBoxComponent } from './shared/components/dish-check-box/dish-check-box.component';
 
 const materialModules = [
   MatIconModule,
@@ -50,7 +50,7 @@ const materialModules = [
     SmallDishDetailsComponent,
     SelectnumbersComponent,
     NumberOptionComponent,
-    DishCheckListComponent
+    DishCheckBoxComponent,
   ],
   imports: [
     BrowserModule,
