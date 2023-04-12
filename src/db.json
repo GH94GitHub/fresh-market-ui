@@ -25,7 +25,7 @@
       "name": "Bavette Steak & Roasted Garlic Sauce ",
       "description": "Served with mashed potatoes and asparagus",
       "calorieAmount": 800,
-      "imgUrl": "images/bavette_steak.jpg",
+      "imgUrl": "/assets/images/bavette_steak.webp",
       "category": "Dinner",
       "allergies": [
         {
@@ -39,7 +39,7 @@
       "name": "Honey Garlic Butter Shrimp & Broccoli",
       "description": "A delicious honey sauce that coats the shrimp and broccoli beautifully. With hints of garlic and ginger.  Comes together in 20 minutes. ",
       "calorieAmount": 370,
-      "imgUrl": "images/honey_garlic_butter_shrimp.jpg",
+      "imgUrl": "/assets/images/honey_garlic_butter_shrimp.webp",
       "category": "Dinner",
       "allergies": [
         {
@@ -57,7 +57,7 @@
       "name": "Creamy Chive Salmon",
       "description": "Served with roasted potato Wedges & Lemony Zucchini",
       "calorieAmount": 750,
-      "imgUrl": "images/creamy_chive_salmon.jpg",
+      "imgUrl": "/assets/images/creamy_chive_salmon.webp",
       "category": "Dinner",
       "allergies": [
         {

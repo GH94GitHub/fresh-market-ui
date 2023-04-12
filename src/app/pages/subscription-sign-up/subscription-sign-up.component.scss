@@ -13,6 +13,23 @@
   }
 }
 
+#dishesForm {
+  display: flex;
+
+  .dishCheckBoxContainer {
+    display: flex;
+
+    .dishCheckBox {
+      display: flex;
+      align-self: stretch;
+    }
+    &::ng-deep label{
+      align-self: stretch;
+    }
+  }
+
+}
+
 mat-form-field {
   width: 500px;
 }

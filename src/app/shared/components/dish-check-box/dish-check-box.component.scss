@@ -1,0 +1,15 @@
+.dish-card {
+  height: 100%;
+  width: min-content;
+}
+
+mat-card-content {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 5px 10%;
+
+  p {
+    text-align: center;
+  }
+}

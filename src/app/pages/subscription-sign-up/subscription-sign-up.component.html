@@ -84,15 +84,14 @@
 
         <section>
           <h2>Select Dishes</h2>
-          <app-dish-check-box></app-dish-check-box>
-          <form [formGroup]="dishesFormGroup">
-            <span *ngFor="let dish of dishes">
+          <form [formGroup]="dishesFormGroup" id="dishesForm">
+            <div class="dishCheckBoxContainer" *ngFor="let dish of dishes">
               <mat-checkbox
-                class="dishCheckBox"
-                formControlName="{{ dish.name + dish.dishId }}">
-                {{ dish.name }}
+              class="dishCheckBox"
+              formControlName="{{ dish.name + dish.dishId }}">
+              <app-dish-check-box [dish]="dish"></app-dish-check-box>
               </mat-checkbox>
-            </span>
+            </div>
           </form>
         </section>
 
