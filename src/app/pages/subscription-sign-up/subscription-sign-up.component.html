@@ -1,6 +1,6 @@
 <div id="pageContainer">
   <mat-stepper orientation="vertical" [linear]="false" #stepper>
-    <!-- Info -->
+    <!-- Step 1 -->
     <mat-step [stepControl]="infoFormGroup">
       <ng-template matStepLabel>Fill out your info</ng-template>
       <div class="step-content">
@@ -42,7 +42,6 @@
             />
             <mat-error *ngIf="infoFormGroup.controls['phoneNumber'].errors?.['required']">Phone Number is required</mat-error>
           </mat-form-field>
-          <!-- <br/> -->
 
           <!-- Allergies -->
           <mat-form-field appearance="fill" subscriptSizing="dynamic">
@@ -85,6 +84,7 @@
 
         <section>
           <h2>Select Dishes</h2>
+          <app-dish-check-box></app-dish-check-box>
           <form [formGroup]="dishesFormGroup">
             <span *ngFor="let dish of dishes">
               <mat-checkbox
