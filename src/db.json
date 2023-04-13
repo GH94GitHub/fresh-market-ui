@@ -19,58 +19,298 @@
       "dishCount": 4
     }
   ],
-  "dishes": [
+  "dishes":[
     {
-      "dishId": 1,
-      "name": "Bavette Steak & Roasted Garlic Sauce ",
-      "description": "Served with mashed potatoes and asparagus",
-      "calorieAmount": 800,
-      "imgUrl": "/assets/images/bavette_steak.webp",
-      "category": "Dinner",
-      "allergies": [
-        {
-          "allergyId": 2,
-          "name": "Milk"
-        }
-      ]
+        "dishId": 1,
+        "name": "Bavette Steak",
+        "description": "Roasted garlic and rich beef demi-glace sauce poured over bavette steak. Sides include chive-flecked mashed potatoes and crisp roasted asparagus.",
+        "calorieAmount": 800,
+        "category": "Dinner",
+        "imgUrl": "/assets/images/bavette_steak.webp",
+        "allergies": [
+            {
+                "allergyId": 1,
+                "name": "Milk"
+            }
+        ]
     },
     {
-      "dishId": 2,
-      "name": "Honey Garlic Butter Shrimp & Broccoli",
-      "description": "A delicious honey sauce that coats the shrimp and broccoli beautifully. With hints of garlic and ginger.  Comes together in 20 minutes. ",
-      "calorieAmount": 370,
-      "imgUrl": "/assets/images/honey_garlic_butter_shrimp.webp",
-      "category": "Dinner",
-      "allergies": [
-        {
-          "allergyId": 3,
-          "name": "Shellfish"
-        },
-        {
-          "allergyId": 4,
-          "name": "Soy"
-        }
-      ]
+        "dishId": 2,
+        "name": "Honey garlic butter shrimp & broccoli",
+        "description": "A delicious honey sauce that coats the shrimp and broccoli beautifully. With hints of garlic and ginger.  Comes together in 20 minutes.",
+        "calorieAmount": 370,
+        "category": "Dinner",
+        "imgUrl": "/assets/images/honey_garlic_butter_shrimp.webp",
+        "allergies": [
+            {
+                "allergyId": 2,
+                "name": "Shellfish"
+            },
+            {
+                "allergyId": 3,
+                "name": "Soy"
+            }
+        ]
     },
     {
-      "dishId": 3,
-      "name": "Creamy Chive Salmon",
-      "description": "Served with roasted potato Wedges & Lemony Zucchini",
-      "calorieAmount": 750,
-      "imgUrl": "/assets/images/creamy_chive_salmon.webp",
-      "category": "Dinner",
-      "allergies": [
-        {
-          "allergyId": 2,
-          "name": "Milk"
-        },
-        {
-          "allergyId": 5,
-          "name": "Fish"
-        }
-      ]
+        "dishId": 3,
+        "name": "Creamy Chive Salmon",
+        "description": "Salmon fillets are pan-seared until crisp, then served alongside roasted potatoes and lemony zucchini. For a tasty finish, the salmon is drizzled with a creamy pan sauce.",
+        "calorieAmount": 750,
+        "category": "Dinner",
+        "imgUrl": "/assets/images/creamy_chive_salmon.webp",
+        "allergies": [
+            {
+                "allergyId": 1,
+                "name": "Milk"
+            },
+            {
+                "allergyId": 4,
+                "name": "Fish"
+            }
+        ]
+    },
+    {
+        "dishId": 4,
+        "name": "Thai Chicken Burgers",
+        "description": "Unique spin on chicken burgers using sesame oil, soy sauce and sriracha to complete the flavor profile. The chicken sits between two toasted potato buns topped with hoisin sauce and mayonnaise. For a light, crispy side, we’ll roast hearty homemade potato wedge fries.",
+        "calorieAmount": 700,
+        "category": "Dinner",
+        "imgUrl": "/assets/images/Thai_Chicken_Burgers.webp",
+        "allergies": [
+            {
+                "allergyId": 3,
+                "name": "Soy"
+            },
+            {
+                "allergyId": 5,
+                "name": "Eggs"
+            }
+        ]
+    },
+    {
+        "dishId": 5,
+        "name": "Chicken Pot-stickers",
+        "description": "In this recipe, you’ll boil the pot-stickers to give them a tender, chewy center, then pan-fry them to create a crispy golden outside. It’s the best of both worlds!",
+        "calorieAmount": 680,
+        "category": "Dinner",
+        "imgUrl": "/assets/images/Chicken_Potstickers.webp",
+        "allergies": [
+            {
+                "allergyId": 3,
+                "name": "Soy"
+            }
+        ]
+    },
+    {
+        "dishId": 6,
+        "name": "Turkey Molto Penne",
+        "description": "You’ll start with a base of al dente penne, then toss in blistered tomatoes and ground turkey. Mix in a homemade creamy pesto sauce.",
+        "calorieAmount": 980,
+        "category": "Dinner",
+        "imgUrl": "/assets/images/Turkey_Molto_Penne.webp",
+        "allergies": [
+            {
+                "allergyId": 1,
+                "name": "Milk"
+            }
+        ]
+    },
+    {
+        "dishId": 7,
+        "name": "Spiced Turkey Lettuce Wraps",
+        "description": "This version features fragrant, shawarma-spiced ground turkey scooped into lettuce leaves, topped with fresh tomato and tangy pickled onion, drizzled with creamy lemon-garlic sauce, and finished with crunchy almonds and hot sauce. ",
+        "calorieAmount": 550,
+        "category": "Dinner",
+        "imgUrl": "/assets/images/Spiced_Turkey_Lettuce_Wraps.webp",
+        "allergies": [
+            {
+                "allergyId": 1,
+                "name": "Milk"
+            },
+            {
+                "allergyId": 5,
+                "name": "Eggs"
+            },
+            {
+                "allergyId": 6,
+                "name": "Nuts"
+            }
+        ]
+    },
+    {
+        "dishId": 8,
+        "name": "Korean BBQ Steak",
+        "description": "Gochujang is our go-to pantry item when we want a little funk, a touch of spice, and a whole lotta flavor. Whisk this stunning crimson condiment into sweet teriyaki glaze and serve it with tender top blade steak for an unparalleled dining experience.",
+        "calorieAmount": 680,
+        "category": "Dinner",
+        "imgUrl": "/assets/images/Korean_BBQ_Steak.webp",
+        "allergies": [
+            {
+                "allergyId": 1,
+                "name": "Milk"
+            }
+        ]
+    },
+    {
+        "dishId": 9,
+        "name": "Cajun Shrimp Chopped Salad",
+        "description": "This chopped salad perfectly balances smoky and sweet flavors, thanks to Cajun-spiced shrimp and charred corn, tossed with juicy grape tomatoes and fresh lettuce. Everything’s tossed in a tangy, lemony Caesar dressing for a creamy finish that brings the whole bowl together. ",
+        "calorieAmount": 540,
+        "category": "Dinner",
+        "imgUrl": "/assets/images/Cajun_Shrimp_Chopped_Salad.webp",
+        "allergies": [
+            {
+                "allergyId": 1,
+                "name": "Milk"
+            },
+            {
+                "allergyId": 2,
+                "name": "Shellfish"
+            },
+            {
+                "allergyId": 5,
+                "name": "Eggs"
+            }
+        ]
+    },
+    {
+        "dishId": 10,
+        "name": "Soy-Glazed Salmon",
+        "description": "This rich, flaky salmon is double glazed with a layer of sweet soy and Korean chili flakes, and finally, a drizzle of sweet + hot apricot-sriracha mayo over top. The salmon is served over a bed of jasmine rice with garlic-chili green beans plus tangy pickled cukes.",
+        "calorieAmount": 1170,
+        "category": "Dinner",
+        "imgUrl": "/assets/images/SoyGlazed_Salmon_with_Rice.webp",
+        "allergies": [
+            {
+                "allergyId": 1,
+                "name": "Milk"
+            },
+            {
+                "allergyId": 3,
+                "name": "Soy"
+            },
+            {
+                "allergyId": 4,
+                "name": "Fish"
+            },
+            {
+                "allergyId": 5,
+                "name": "Eggs"
+            }
+        ]
+    },
+    {
+        "dishId": 11,
+        "name": "Chorizo, Egg, and Avocado Sandwich",
+        "description": "This sandwich holds Spain’s most famous sausage laced with paprika, topped with egg and avocado surrounded by two brioche buns. On the side you will have skillet-fried potato hash. A meal put together for your energy.",
+        "calorieAmount": 810,
+        "category": "Breakfast",
+        "imgUrl": "/assets/images/Chorizo_Egg_Avocado_Sandwich.webp",
+        "allergies": [
+            {
+                "allergyId": 1,
+                "name": "Milk"
+            },
+            {
+                "allergyId": 3,
+                "name": "Soy"
+            },
+            {
+                "allergyId": 5,
+                "name": "Eggs"
+            }
+        ]
+    },
+    {
+        "dishId": 12,
+        "name": "Cheesy Egg & Pepper Tacos",
+        "description": "Kickstart your day with these zesty breakfast tacos, which bring together soft scrambled eggs, tender aloha (or striped bell) pepper, melty white cheddar, and a spicy chipotle sour cream.",
+        "calorieAmount": 560,
+        "category": "Breakfast",
+        "imgUrl": "/assets/images/Cheesy_Egg_and_Pepper_Tacos.webp",
+        "allergies": [
+            {
+                "allergyId": 1,
+                "name": "Milk"
+            },
+            {
+                "allergyId": 5,
+                "name": "Eggs"
+            }
+        ]
+    },
+    {
+        "dishId": 13,
+        "name": "Nutella-Churro French Toast",
+        "description": "Beside crispy bacon slices, you will make thick cut Texas toast, coated with cinnamon sugar and drizzled with hazelnut-chocolate Nutella to harness the beloved churro and to satisfy your sweet tooth.",
+        "calorieAmount": 800,
+        "category": "Breakfast",
+        "imgUrl": "/assets/images/Nutella_Churro_French_Toast.webp",
+        "allergies": [
+            {
+                "allergyId": 1,
+                "name": "Milk"
+            },
+            {
+                "allergyId": 3,
+                "name": "Soy"
+            },
+            {
+                "allergyId": 5,
+                "name": "Eggs"
+            },
+            {
+                "allergyId": 6,
+                "name": "Nuts"
+            }
+        ]
+    },
+    {
+        "dishId": 14,
+        "name": "Denver Omelette Breakfast Muffins",
+        "description": "The classic Denver omelette gets a make-over in this dish. Green bell pepper, sausage, and cheddar are combined in these mini-muffins with egg, then baked until fluffy and cheesy. Served with a dollop of sour cream and green onions.",
+        "calorieAmount": 510,
+        "category": "Breakfast",
+        "imgUrl": "/assets/images/Denver_Omelette_Breakfast_Muffins.webp",
+        "allergies": [
+            {
+                "allergyId": 1,
+                "name": "Milk"
+            },
+            {
+                "allergyId": 5,
+                "name": "Eggs"
+            }
+        ]
+    },
+    {
+        "dishId": 15,
+        "name": "Pumpkin Pancakes & Bacon",
+        "description": "Reminiscent of pumpkin pie, these hot cakes are a breeze to make, and are crowned with walnuts, butter, and dripping with syrup. Paired with crisp and smoky bacon.",
+        "calorieAmount": 960,
+        "category": "Breakfast",
+        "imgUrl": "/assets/images/Pumpkin_Pancakes_and_Bacon.webp",
+        "allergies": [
+            {
+                "allergyId": 1,
+                "name": "Milk"
+            },
+            {
+                "allergyId": 3,
+                "name": "Soy"
+            },
+            {
+                "allergyId": 5,
+                "name": "Eggs"
+            },
+            {
+                "allergyId": 6,
+                "name": "Nuts"
+            }
+        ]
     }
-  ],
+],
   "allergies": [
     {
       "allergyId": 1,
