@@ -1,12 +1,14 @@
-<mat-card class="dish-card">
+<mat-card class="dish-card" (mouseleave)="doSeeLess()">
   <mat-card-header>
     <mat-card-title>{{ dish.name }}</mat-card-title>
-    <mat-card-subtitle>{{ dish.category }}</mat-card-subtitle>
   </mat-card-header>
   <img mat-card-image [src]="dish.imgUrl" [alt]="dish.name" width="215" height="225">
-  <mat-card-content>
+  <mat-card-content [ngClass]="{'expand': isSeeMore}">
     <p>
       {{ dish.description }}
     </p>
   </mat-card-content>
+  <mat-card-actions>
+    <a class="seeMore" (click)="toggleDescriptionHeight($event)">{{ isSeeMore? "...See Less": "See More..." }}</a>
+  </mat-card-actions>
 </mat-card>

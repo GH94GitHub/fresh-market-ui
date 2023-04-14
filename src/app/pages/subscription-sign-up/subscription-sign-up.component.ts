@@ -1,9 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { AllergyService } from 'src/app/shared/services/allergy.service';
 import { DishService } from 'src/app/shared/services/dish.service';
 import { Allergy, Dish } from 'src/app/types';
+import { DISH_CATEGORIES } from 'src/app/constants';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 
 
 @Component({
@@ -16,6 +18,7 @@ export class SubscriptionSignUpComponent implements OnInit {
   infoFormGroup!: FormGroup;
   dishesFormGroup!: FormGroup;
   credentialsFormGroup!: FormGroup;
+  readonly dishCategories: string[] = DISH_CATEGORIES;
 
   allergies!: Allergy[];
   dishes!: Dish[];
@@ -25,7 +28,8 @@ export class SubscriptionSignUpComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private allergyService: AllergyService,
-    private dishService: DishService
+    private dishService: DishService,
+    private renderer: Renderer2
     ) {}
 
   ngOnInit(): void {
@@ -77,6 +81,18 @@ export class SubscriptionSignUpComponent implements OnInit {
     });
     // Go to next step
     this.stepper.next();
+  }
+
+  dishChosen(e: MatCheckboxChange) {
+    if(e.checked) {
+      // TODO: fill mat-card with green when checked
+      console.log("Checked", e.source);
+    }
+  }
+
+  // Returns dishes by category
+  getDishesInCategory(category: string): Dish[] {
+    return this.dishes.filter(d => d.category==category);
   }
 
   changeServing(num: number): void {

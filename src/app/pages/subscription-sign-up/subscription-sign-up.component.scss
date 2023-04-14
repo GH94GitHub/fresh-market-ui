@@ -15,19 +15,57 @@
 
 #dishesForm {
   display: flex;
+  flex-direction: column;
 
-  .dishCheckBoxContainer {
-    display: flex;
+  .categoryContainer {
 
-    .dishCheckBox {
-      display: flex;
-      align-self: stretch;
+    .categoryTitle {
+      text-align: center;
     }
-    &::ng-deep label{
-      align-self: stretch;
+    
+    .categoryDishesContainer {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-y: hidden;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+      direction: rtl;
+
+      &, & .dishCheckBoxContainer {
+        // Position scrollbar at the top
+        transform: rotate(180deg);
+        margin: 10px;
+      }
+
+      &::-webkit-scrollbar {
+        width: 10px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: yellow;
+        border: 5px solid rgba(235,235,235,.8);
+        border-radius: 10px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background-color: rgba(235,235,235,.8);
+      }
+      scrollbar-color: yellow auto;
+      
+      .dishCheckBoxContainer {
+        direction: ltr;
+        display: flex;
+    
+        mat-checkbox.dishCheckBox {
+          display: flex;
+          align-self: stretch;
+        }
+        &::ng-deep label{
+          align-self: stretch;
+        }
+      }
     }
   }
-
 }
 
 mat-form-field {

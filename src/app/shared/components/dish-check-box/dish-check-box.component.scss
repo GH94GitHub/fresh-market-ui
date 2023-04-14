@@ -1,15 +1,25 @@
 .dish-card {
-  height: 100%;
   width: min-content;
 }
 
 mat-card-content {
-  height: 100%;
+  height: auto;
+  max-height: 75px;
   display: flex;
-  align-items: center;
+  overflow: hidden;
   padding: 5px 10%;
+  transition: max-height .2s ease-out;
+
+  &.expand {
+    max-height: 500px;
+  }
 
   p {
     text-align: center;
   }
 }
+
+.seeMore {
+  color: blue;
+}
+

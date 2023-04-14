@@ -83,14 +83,21 @@
         </section>
 
         <section>
-          <h2>Select Dishes</h2>
           <form [formGroup]="dishesFormGroup" id="dishesForm">
-            <div class="dishCheckBoxContainer" *ngFor="let dish of dishes">
-              <mat-checkbox
-              class="dishCheckBox"
-              formControlName="{{ dish.name + dish.dishId }}">
-              <app-dish-check-box [dish]="dish"></app-dish-check-box>
-              </mat-checkbox>
+            <div class="categoryContainer" *ngFor="let category of dishCategories">
+              <h2 class="categoryTitle">{{ category }}</h2>
+              <!-- Container that contains all of the dishes-->
+              <div class="categoryDishesContainer">
+                <!-- Contains a single dish card-->
+                <div class="dishCheckBoxContainer" *ngFor="let dish of getDishesInCategory(category)">
+                  <mat-checkbox
+                  (change)="dishChosen($event)"
+                  class="dishCheckBox"
+                  formControlName="{{ dish.name + dish.dishId }}">
+                  <app-dish-check-box [dish]="dish"></app-dish-check-box>
+                  </mat-checkbox>
+                </div>
+              </div>
             </div>
           </form>
         </section>
