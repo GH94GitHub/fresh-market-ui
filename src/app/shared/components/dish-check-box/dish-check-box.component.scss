@@ -1,5 +1,14 @@
 .dish-card {
   width: min-content;
+  user-select: none;
+}
+
+// Highlight card when 'checked' or selected
+mat-card.checked {
+  background-color: lime; //TODO: change to theme colors & animate the fill of color
+  mat-card-content {
+    background-color: yellow; //TODO: change to theme colors
+  }
 }
 
 mat-card-content {
@@ -19,6 +28,9 @@ mat-card-content {
   }
 }
 
+mat-card-actions {
+  min-height: unset;
+}
 .seeMore {
   color: blue;
 }

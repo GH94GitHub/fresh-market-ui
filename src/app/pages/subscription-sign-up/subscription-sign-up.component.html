@@ -1,148 +1,152 @@
+<form [formGroup]="userForm" (ngSubmit)="registerUser()">
 <div id="pageContainer">
-  <mat-stepper orientation="vertical" [linear]="false" #stepper>
-    <!-- Step 1 -->
-    <mat-step [stepControl]="infoFormGroup">
-      <ng-template matStepLabel>Fill out your info</ng-template>
-      <div class="step-content">
-        <form [formGroup]="infoFormGroup" fxLayout="column" fxLayoutGap="15px" >
+    <mat-stepper orientation="vertical" [linear]="false" #stepper ><!-- FIXME: Change [linear] back to true After development-->
+      <!-- Step 1 -->
+      <mat-step [stepControl]="userForm.controls['infoFormGroup']">
+        <ng-template matStepLabel>Fill out your info</ng-template>
+        <div class="step-content">
+          <div formGroupName="infoFormGroup" fxLayout="column" fxLayoutGap="15px" >
 
-          <!-- Name -->
-          <mat-form-field appearance="fill" subscriptSizing="dynamic">
-            <mat-label>Name</mat-label>
-            <input
-              matInput
-              placeholder="Last name, First name"
-              formControlName="name"
-              required
-            />
-            <mat-error *ngIf="infoFormGroup.controls['name'].errors?.['required']">Name is required</mat-error>
-          </mat-form-field>
-          <!-- <br/> -->
-
-          <!-- Address -->
-          <mat-form-field appearance="fill" subscriptSizing="dynamic">
-            <mat-label>Address</mat-label>
-            <input
-              matInput
-              placeholder="Enter your address"
-              formControlName="address"
-              required
-            />
+            <!-- Name -->
+            <mat-form-field appearance="fill" subscriptSizing="dynamic">
+              <mat-label>Name</mat-label>
+              <input
+                matInput
+                placeholder="Last name, First name"
+                formControlName="name"
+                required
+              />
+              <mat-error *ngIf="userForm.controls['infoFormGroup'].get('name')!.errors?.['required']">Name is required</mat-error>
+            </mat-form-field>
             <!-- <br/> -->
-            <mat-error *ngIf="infoFormGroup.controls['address'].errors?.['required']">Address is required</mat-error>
-          </mat-form-field>
 
-          <!-- Phone Number -->
-          <mat-form-field appearance="fill" subscriptSizing="dynamic">
-            <mat-label>Phone Number</mat-label>
-            <input
-              matInput
-              placeholder="Enter your phone #"
-              formControlName="phoneNumber"
-            />
-            <mat-error *ngIf="infoFormGroup.controls['phoneNumber'].errors?.['required']">Phone Number is required</mat-error>
-          </mat-form-field>
+            <!-- Address -->
+            <mat-form-field appearance="fill" subscriptSizing="dynamic">
+              <mat-label>Address</mat-label>
+              <input
+                matInput
+                placeholder="Enter your address"
+                formControlName="address"
+                required
+              />
+              <!-- <br/> -->
+              <mat-error *ngIf="userForm.controls['infoFormGroup'].get('address')!.errors?.['required']">Address is required</mat-error>
+            </mat-form-field>
 
-          <!-- Allergies -->
-          <mat-form-field appearance="fill" subscriptSizing="dynamic">
-            <mat-label>Allergies</mat-label>
-            <mat-select formControlName="allergies" placeholder="None" multiple>
-              <mat-option
-                *ngFor="let allergy of allergies"
-                [value]="allergy.name"
-                >{{ allergy.name }}</mat-option
-              >
-            </mat-select>
-          </mat-form-field>
-        </form>
-        <br>
-        <div fxLayoutAlign="end">
-          <button mat-raised-button color="accent" (click)="showDishStep()">Next</button>
+            <!-- Phone Number -->
+            <mat-form-field appearance="fill" subscriptSizing="dynamic">
+              <mat-label>Phone Number</mat-label>
+              <input
+                matInput
+                placeholder="Enter your phone #"
+                formControlName="phoneNumber"
+              />
+              <mat-error *ngIf="userForm.controls['infoFormGroup'].get('phoneNumber')!.errors?.['required']">Phone Number is required</mat-error>
+            </mat-form-field>
+
+            <!-- Allergies -->
+            <mat-form-field appearance="fill" subscriptSizing="dynamic">
+              <mat-label>Allergies</mat-label>
+              <mat-select formControlName="allergies" placeholder="None" multiple>
+                <mat-option
+                  *ngFor="let allergy of allergies"
+                  [value]="allergy"
+                  >{{ allergy.name }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <br>
+          <div fxLayoutAlign="end">
+            <button mat-raised-button type="button" color="accent" (click)="showDishStep()" [disabled]="!userForm.controls['infoFormGroup'].valid">Next</button>
+          </div>
         </div>
-      </div>
-    </mat-step>
+      </mat-step>
 
-    <!-- Step 2 -->
-    <mat-step [stepControl]="dishesFormGroup">
-      <div class="step-content">
-        <ng-template matStepLabel>Select Dishes</ng-template>
-        <section>
-          <h2>Family Size</h2>
-          <app-selectnumbers
-          [range]="[2, 3, 4]"
-            (selectionChange)="changeServing($event)"
+      <!-- Step 2 -->
+      <mat-step [stepControl]="userForm.controls['dishesFormGroup']">
+        <div class="step-content">
+          <ng-template matStepLabel>Select Dishes</ng-template>
+          <section>
+            <h2>Family Size</h2>
+            <app-selectnumbers
+            [range]="[2, 3, 4]"
+              (selectionChange)="changeServing($event)"
+              ></app-selectnumbers>
+          </section>
+
+          <section>
+            <h2>Number of Meals/Week</h2>
+            <app-selectnumbers
+            [range]="getTierDishCountRange()"
+            (selectionChange)="changeMealsPW($event)"
             ></app-selectnumbers>
-        </section>
+          </section>
 
-        <section>
-          <h2>Number of Meals/Week</h2>
-          <app-selectnumbers
-          [range]="[2, 3, 4]"
-          (selectionChange)="changeMealsPW($event)"
-          ></app-selectnumbers>
-        </section>
-
-        <section>
-          <form [formGroup]="dishesFormGroup" id="dishesForm">
-            <div class="categoryContainer" *ngFor="let category of dishCategories">
-              <h2 class="categoryTitle">{{ category }}</h2>
-              <!-- Container that contains all of the dishes-->
-              <div class="categoryDishesContainer">
-                <!-- Contains a single dish card-->
-                <div class="dishCheckBoxContainer" *ngFor="let dish of getDishesInCategory(category)">
-                  <mat-checkbox
-                  (change)="dishChosen($event)"
-                  class="dishCheckBox"
-                  formControlName="{{ dish.name + dish.dishId }}">
-                  <app-dish-check-box [dish]="dish"></app-dish-check-box>
-                  </mat-checkbox>
+          <section>
+            <div formGroupName="dishesFormGroup" id="dishesForm">
+              <div class="categoryContainer" *ngFor="let category of dishCategories">
+                <h2 class="categoryTitle">{{ category }}</h2>
+                <!-- Container that contains all of the dishes-->
+                <div class="categoryDishesContainer">
+                  <!-- Contains a single dish card-->
+                  <div class="dishCheckBoxContainer" *ngFor="let dish of getDishesInCategory(category)">
+                    <mat-checkbox
+                    class="dishCheckBox"
+                    [formControlName]="dish.name + '-' + dish.dishId">
+                      <app-dish-check-box [id]="dish.name + '-' + dish.dishId" [dish]="dish" (check)="checkDishToggle($event)"></app-dish-check-box>
+                    </mat-checkbox>
+                  </div>
                 </div>
               </div>
             </div>
-          </form>
-        </section>
+          </section>
 
-          <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-raised-button color="accent" matStepperNext>Next</button>
-          </div>
-      </div>
-    </mat-step>
-
-    <!-- Step 3 -->
-    <mat-step>
-      <ng-template matStepLabel>Register</ng-template>
-      <div class="step-content">
-        <form [formGroup]="credentialsFormGroup" fxLayout="column">
-          <!-- Email -->
-          <mat-form-field appearance="fill">
-            <mat-label>Email</mat-label>
-            <input
-              matInput
-              placeholder="Enter your email"
-              formControlName="email"
-              required
-            />
-          </mat-form-field>
-
-          <!-- Password -->
-          <mat-form-field appearance="fill">
-            <mat-label>Password</mat-label>
-            <input
-              matInput
-              placeholder="Enter your password"
-              type="password"
-              formControlName="password"
-              required
-            />
-          </mat-form-field>
-        </form>
-        <div>
-          <button mat-button color="warn" (click)="stepper.reset()">Reset</button>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button mat-raised-button color="accent" type="submit">Checkout</button>
+            <div>
+              <button type="button" mat-button matStepperPrevious>Back</button>
+              <button type="button" mat-raised-button color="accent" matStepperNext>Next</button>
+            </div>
         </div>
-      </div>
-    </mat-step>
-  </mat-stepper>
-</div>
+      </mat-step>
+
+      <!-- Step 3 -->
+      <mat-step [stepControl]="userForm.controls['credentialsFormGroup']">
+        <ng-template matStepLabel>Register</ng-template>
+        <div class="step-content">
+          <div formGroupName="credentialsFormGroup" fxLayout="column">
+            <!-- Email -->
+            <mat-form-field appearance="fill">
+              <mat-label>Email</mat-label>
+              <input
+                matInput
+                placeholder="Enter your email"
+                formControlName="email"
+                required
+              />
+              <mat-error *ngIf="userForm.controls['credentialsFormGroup'].get('email')!.touched && userForm.controls['credentialsFormGroup'].get('email')!.errors?.['required']">Email is required</mat-error>
+              <mat-error *ngIf="userForm.controls['credentialsFormGroup'].get('email')!.touched && userForm.controls['credentialsFormGroup'].get('email')!.errors?.['email']">Check email format</mat-error>
+            </mat-form-field>
+
+            <!-- Password -->
+            <mat-form-field appearance="fill">
+              <mat-label>Password</mat-label>
+              <input
+                matInput
+                placeholder="Enter your password"
+                type="password"
+                formControlName="password"
+                required
+              />
+              <mat-error *ngIf="userForm.controls['credentialsFormGroup'].get('password')!.touched && userForm.controls['credentialsFormGroup'].get('password')!.errors?.['required']">Password is required</mat-error>
+            </mat-form-field>
+            <div>
+              <button mat-button type="button" color="warn" (click)="stepper.reset()">Reset</button>
+              <button mat-button type="button" matStepperPrevious>Back</button>
+              <button mat-button mat-raised-button color="accent" type="submit" [disabled]="!userForm.valid">Checkout</button>
+            </div>
+          </div>
+        </div>
+      </mat-step>
+    </mat-stepper>
+  </div>
+</form>

@@ -1,11 +1,12 @@
-import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
-import { AllergyService } from 'src/app/shared/services/allergy.service';
-import { DishService } from 'src/app/shared/services/dish.service';
-import { Allergy, Dish } from 'src/app/types';
+import { AllergyService } from 'src/app/shared/services/allergy/allergy.service';
+import { DishService } from 'src/app/shared/services/dish/dish.service';
+import { Allergy, Dish, Tier, User } from 'src/app/types';
 import { DISH_CATEGORIES } from 'src/app/constants';
-import { MatCheckboxChange } from '@angular/material/checkbox';
+import { UserApiService } from 'src/app/shared/services/user/user-api.service';
+import { TierService } from 'src/app/shared/services/tier/tier.service';
 
 
 @Component({
@@ -15,13 +16,17 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 })
 export class SubscriptionSignUpComponent implements OnInit {
 
-  infoFormGroup!: FormGroup;
-  dishesFormGroup!: FormGroup;
-  credentialsFormGroup!: FormGroup;
+  // Aggregates all the forms from all steps
+  userForm!: FormGroup;
   readonly dishCategories: string[] = DISH_CATEGORIES;
 
-  allergies!: Allergy[];
-  dishes!: Dish[];
+  allergies: Allergy[] = [];
+  dishes: Dish[] = [];
+  tiers: Tier[] = [];
+
+  // Default Value
+  familySizeMultiplier: number = 2;
+  chosenTier!: Tier;
 
   @ViewChild(MatStepper) stepper!: MatStepper;
 
@@ -29,38 +34,52 @@ export class SubscriptionSignUpComponent implements OnInit {
     private fb: FormBuilder,
     private allergyService: AllergyService,
     private dishService: DishService,
-    private renderer: Renderer2
+    private userApiService: UserApiService,
+    private tierService: TierService,
     ) {}
 
-  ngOnInit(): void {
-    // Forms Init
-    this.infoFormGroup = this.fb.group({
-      name: ['', Validators.required],
-      address: ['', Validators.required],
-      phoneNumber: [''],
-      allergies: ['']
+  ngOnInit() {
+    // Init forms
+    this.userForm = this.fb.group({
+      infoFormGroup: this.fb.group({
+        name: ['', Validators.required],
+        address: ['', Validators.required],
+        phoneNumber: [''],
+        allergies: ['']
+      }),
+      dishesFormGroup: this.fb.group({}),
+      credentialsFormGroup: this.fb.group({
+        email: ['', Validators.compose([Validators.required, Validators.email])],
+        password: ['', Validators.required]
+      }),
     });
-      // Add Dish form controls
-    this.dishesFormGroup = this.fb.group({});
+
+    // Add Dish form controls
     this.dishService.getAll().subscribe((r: Dish[]) => {
       for(let dish of r) {
-        this.dishesFormGroup.addControl(dish.name+dish.dishId, new FormControl(''));
+        (this.userForm.controls['dishesFormGroup'] as FormGroup).addControl(dish.name + '-' + dish.dishId, new FormControl(''));
       }
       this.dishes=r;
     });
-    this.credentialsFormGroup = this.fb.group({
-      email: ['', Validators.compose([Validators.required, Validators.email])],
-      password: ['', Validators.required]
+
+    this.tierService.getAll().subscribe((r: Tier[]) => {
+      this.tiers = r;
+      this.chosenTier = r[0];
     });
 
     // Allergies dropdown
     this.allergyService.getAllergies().subscribe((r: Allergy[]) => {
       this.allergies=r;
     });
+
+    // this.userForm.controls['infoFormGroup'].get('name').err
   }
 
-  showDishStep():void {
-    const userAllergies: string[] = this.infoFormGroup.controls['allergies'].value;
+  /* When user advances to step 2 (Select Dishes) this method should filter the dish
+  ** options that conflict with the users allergies and remove them from being chosen
+  */
+  showDishStep() {
+    const userAllergies: string[] = (this.userForm.controls['infoFormGroup'] as FormGroup).controls['allergies'].value;
     let allergicDishes: Dish[] = [];
 
     for(let userAllergy of userAllergies) {
@@ -72,9 +91,9 @@ export class SubscriptionSignUpComponent implements OnInit {
     };
 
     // Disable dishes for which user has an allergy
-    this.dishesFormGroup.enable();
+    (this.userForm.controls['dishesFormGroup'] as FormGroup).enable();
     allergicDishes.forEach((allergicDish: Dish) => {
-      let dishCheckBox: FormControl = this.dishesFormGroup.controls[allergicDish.name+allergicDish.dishId] as FormControl;
+      let dishCheckBox: FormControl = (this.userForm.controls['dishesFormGroup'] as FormGroup).controls[allergicDish.name+allergicDish.dishId] as FormControl;
       if(!dishCheckBox.disabled) {
         dishCheckBox.disable({ onlySelf: true });
       }
@@ -83,23 +102,77 @@ export class SubscriptionSignUpComponent implements OnInit {
     this.stepper.next();
   }
 
-  dishChosen(e: MatCheckboxChange) {
-    if(e.checked) {
-      // TODO: fill mat-card with green when checked
-      console.log("Checked", e.source);
-    }
+  // Used to construct custom component
+  getTierDishCountRange(): number[] {
+    return this.tiers.map(tier => tier.dishCount);
   }
-
   // Returns dishes by category
   getDishesInCategory(category: string): Dish[] {
     return this.dishes.filter(d => d.category==category);
   }
 
-  changeServing(num: number): void {
-    console.log("Serving changed to ", num);
+  // Toggle dish option that cooresponds to data
+  checkDishToggle(data: [boolean, Dish]) {
+    (this.userForm.controls['dishesFormGroup'] as FormGroup).controls[data[1].name+data[1].dishId].setValue(!data[0]);
   }
 
-  changeMealsPW(num: number): void {
-    console.log("Meals per week changed to ", num);
+  // Fired when serving amount is changed
+  changeServing(familySize: number) {
+    console.log("Serving changed to ", familySize);
+    this.familySizeMultiplier = familySize;
   }
+
+  // Fired when meals per week change
+  changeMealsPW(dishCount: number) {
+    console.log("DishCount changed to: ", dishCount)
+    const tier = this.tiers.find(tier => tier.dishCount === dishCount);
+
+    if(tier) {
+      this.chosenTier = tier;
+    } else {
+      console.error("Chosen tier doesn't exist");
+    }
+    console.log("this.chosenTier", this.chosenTier);
+  }
+
+  // Fired when user completes the form and clicks the submit button
+  registerUser() {
+    this.userApiService.registerUser(this.getUserFromForm());
+  }
+
+  private getUserFromForm(): User {
+
+    // Parse infoFormGroup
+    const infoForm = this.userForm.controls['infoFormGroup'];
+    const USER_NAME: string = infoForm.get('name')!.value;
+    const infoKeyValues = {
+      firstName: USER_NAME.split(',')[1].trim(),
+      lastName: USER_NAME.split(',')[0].trim(),
+      address: infoForm.get('address')!.value,
+      phoneNumber: infoForm.get('phoneNumber')!.value,
+      allergies: infoForm.get('allergies')!.value,
+    }
+
+    // Parse dishesFormGroup
+    const dishesForm = this.userForm.controls['dishesFormGroup'];
+    const dishesKeyValues = {
+      dishPreferences: undefined, // TODO: dishArray
+      subscription: undefined,// TODO: Parse subscription
+    }
+
+    // Parse credentialsFormGroup
+    const credentialsForm = this.userForm.controls['credentialsFormGroup'];
+    const credentialsKeyValues = {
+      email: credentialsForm.get('email')!.value,
+      password: credentialsForm.get('password')!.value,
+    }
+
+    const user: User = {
+      ...infoKeyValues,
+      ...dishesKeyValues,
+      ...credentialsKeyValues,
+    }
+    return user;
+  }
+
 }

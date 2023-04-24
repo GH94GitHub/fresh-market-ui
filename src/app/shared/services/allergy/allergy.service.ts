@@ -1,18 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { API } from 'src/app/constants';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DishService {
+export class AllergyService {
 
-  private readonly PATH: string = "dishes";
-  private readonly DISH_API: string = `http://localhost:3000/${this.PATH}`;
+  private readonly ALLERGY_API: string = API.ALLERGY_API;
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<any> {
-    return this.http.get(this.DISH_API);
+  public getAllergies(): Observable<any> {
+    return this.http.get(this.ALLERGY_API);
   }
 }

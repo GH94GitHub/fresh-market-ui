@@ -1,26 +1,30 @@
 export interface Subscription {
-  subscriptionId: number,
-  expirationDate: string,
-  tier: number,
-  user: number
+
+  expirationDate?: string,
+  billingPeriod: "TRIAL" | "MONTHLY" | "THREE_MONTHS"
+  totalCost?: number,
+  tier: Tier
 }
 
 export interface User {
-  userId: number,
+  userId?: number,
   firstName: string,
   lastName: string,
   email: string,
+  password?: string,
   address: string,
-  phoneNumber: string,
-  dishPreferences: Dish[],
-  allergies: Allergy[],
-  subscription: number | void
+  phoneNumber?: string,
+  dishPreferences?: Dish[],
+  allergies?: Allergy[],
+  familySize: number,
+  subscription?: Subscription
 }
 
 export interface Tier {
-  tierLevel: number,
-  price: number,
-  dishCount: number
+  tierId: number,
+  tierLevel: "ONE" | "TWO" | "THREE",
+  basePrice: number,
+  dishCount: "TWO" | "THREE" | "FOUR"
 }
 export interface Allergy {
   allergyId: number,

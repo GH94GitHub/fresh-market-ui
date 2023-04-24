@@ -22,7 +22,7 @@
     .categoryTitle {
       text-align: center;
     }
-    
+
     .categoryDishesContainer {
       display: flex;
       flex-wrap: nowrap;
@@ -41,6 +41,7 @@
       &::-webkit-scrollbar {
         width: 10px;
       }
+      // TODO: Change to theme colors
       &::-webkit-scrollbar-thumb {
         background-color: yellow;
         border: 5px solid rgba(235,235,235,.8);
@@ -51,14 +52,17 @@
         background-color: rgba(235,235,235,.8);
       }
       scrollbar-color: yellow auto;
-      
+
       .dishCheckBoxContainer {
         direction: ltr;
         display: flex;
-    
+
         mat-checkbox.dishCheckBox {
           display: flex;
           align-self: stretch;
+        }
+        &::ng-deep .mdc-checkbox {
+          display: none;
         }
         &::ng-deep label{
           align-self: stretch;

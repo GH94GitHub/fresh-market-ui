@@ -3,19 +3,19 @@
     {
       "tierId": 1,
       "tierLevel": 1,
-      "price": 40.0,
+      "basePrice": 27.95,
       "dishCount": 2
     },
     {
       "tierId": 2,
       "tierLevel": 2,
-      "price": 75.0,
+      "basePrice": 31.95,
       "dishCount": 3
     },
     {
       "tierId": 3,
       "tierLevel": 3,
-      "price": 100.0,
+      "basePrice": 35.95,
       "dishCount": 4
     }
   ],
@@ -374,7 +374,7 @@
         "expirationDate": "10/04/2020",
         "tier": {
           "tierLevel": "ONE",
-          "price": 40.0,
+          "basePrice": 27.95,
           "dishCount": "TWO",
           "id": 1
         }

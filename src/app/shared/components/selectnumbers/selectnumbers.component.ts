@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, Renderer2, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'app-selectnumbers',
@@ -18,11 +18,12 @@ export class SelectnumbersComponent implements OnInit {
 
   @Output("selectionChange") selectionChange = new EventEmitter<number>();
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2) {
+  }
 
   ngOnInit(): void {
-    //default value todo: change
-    this.changeSelection(2);
+    // TODO: Make Default Value work propertly
+    this.changeSelection(this._range[0]);
   }
 
   changeSelection(num: number): void {
