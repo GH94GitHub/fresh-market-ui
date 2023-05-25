@@ -69,18 +69,19 @@
           <ng-template matStepLabel>Select Dishes</ng-template>
           <section>
             <h2>Family Size</h2>
-            <app-selectnumbers
+            <number-range
             [range]="[2, 3, 4]"
-              (selectionChange)="changeServing($event)"
-              ></app-selectnumbers>
+              (numberSelected)="changeServing($event)"
+              ></number-range>
           </section>
 
           <section>
             <h2>Number of Meals/Week</h2>
-            <app-selectnumbers
-            [range]="getTierDishCountRange()"
-            (selectionChange)="changeMealsPW($event)"
-            ></app-selectnumbers>
+            <number-range
+            *ngIf="tiers.length > 0"
+            [range]="tierDishCountRange"
+            (numberSelected)="changeMealsPW($event)"
+            ></number-range>
           </section>
 
           <section>

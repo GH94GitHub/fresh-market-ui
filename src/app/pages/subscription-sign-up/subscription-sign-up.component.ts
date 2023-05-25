@@ -103,7 +103,7 @@ export class SubscriptionSignUpComponent implements OnInit {
   }
 
   // Used to construct custom component
-  getTierDishCountRange(): number[] {
+  get tierDishCountRange(): number[] {
     return this.tiers.map(tier => tier.dishCount);
   }
   // Returns dishes by category
@@ -118,13 +118,11 @@ export class SubscriptionSignUpComponent implements OnInit {
 
   // Fired when serving amount is changed
   changeServing(familySize: number) {
-    console.log("Serving changed to ", familySize);
     this.familySizeMultiplier = familySize;
   }
 
   // Fired when meals per week change
   changeMealsPW(dishCount: number) {
-    console.log("DishCount changed to: ", dishCount)
     const tier = this.tiers.find(tier => tier.dishCount === dishCount);
 
     if(tier) {
@@ -132,7 +130,6 @@ export class SubscriptionSignUpComponent implements OnInit {
     } else {
       console.error("Chosen tier doesn't exist");
     }
-    console.log("this.chosenTier", this.chosenTier);
   }
 
   // Fired when user completes the form and clicks the submit button
@@ -157,6 +154,7 @@ export class SubscriptionSignUpComponent implements OnInit {
     const dishesForm = this.userForm.controls['dishesFormGroup'];
     const dishesKeyValues = {
       dishPreferences: undefined, // TODO: dishArray
+      familySize: this.familySizeMultiplier,
       subscription: undefined,// TODO: Parse subscription
     }
 
