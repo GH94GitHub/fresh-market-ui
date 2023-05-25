@@ -1,5 +1,4 @@
 export interface Subscription {
-
   expirationDate?: string,
   billingPeriod: "TRIAL" | "MONTHLY" | "THREE_MONTHS"
   totalCost?: number,
@@ -22,9 +21,9 @@ export interface User {
 
 export interface Tier {
   tierId: number,
-  tierLevel: "ONE" | "TWO" | "THREE",
+  tierLevel: number,
   basePrice: number,
-  dishCount: "TWO" | "THREE" | "FOUR"
+  dishCount: number
 }
 export interface Allergy {
   allergyId: number,

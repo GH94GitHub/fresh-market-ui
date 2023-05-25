@@ -373,9 +373,9 @@
       "subscription": {
         "expirationDate": "10/04/2020",
         "tier": {
-          "tierLevel": "ONE",
+          "tierLevel": 2,
           "basePrice": 27.95,
-          "dishCount": "TWO",
+          "dishCount": 2,
           "id": 1
         }
       }
