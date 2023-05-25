@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SelectnumbersComponent } from './selectnumbers.component';
+import { NumberRangeComponent } from './number-range.component';
 
-describe('SelectnumbersComponent', () => {
-  let component: SelectnumbersComponent;
-  let fixture: ComponentFixture<SelectnumbersComponent>;
+describe('NumberRangeComponent', () => {
+  let component: NumberRangeComponent;
+  let fixture: ComponentFixture<NumberRangeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SelectnumbersComponent ]
+      declarations: [ NumberRangeComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SelectnumbersComponent);
+    fixture = TestBed.createComponent(NumberRangeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

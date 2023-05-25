@@ -1,0 +1,10 @@
+<div class="number-range">
+  <div
+    class="number-box"
+    *ngFor="let number of numbers"
+    [class.selected]="number === selectedNumber"
+    (click)="selectNumber(number)"
+  >
+    {{ number }}
+  </div>
+</div>
