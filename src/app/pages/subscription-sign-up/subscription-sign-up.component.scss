@@ -1,3 +1,5 @@
+@use 'src/mixins' as mixins;
+
 :host {
     height: 100%;
     width: 100%;
@@ -88,7 +90,9 @@ div.formContainerOffset {
   width: 50px;
 }
 
-
+.error {
+  @include mixins.warn-text-color(A700);
+}
 
 /* Extra small devices (phones, 320px and up) */
 @media only screen and (min-width: 320px) {

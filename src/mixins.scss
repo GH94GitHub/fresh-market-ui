@@ -1,8 +1,8 @@
 @use '@angular/material' as mat;
 
-// $primary: mat.$light-green-palette;
-// $accent: mat.$lime-palette;
-// $warn: mat.$deep-orange-palette;
+$primary: mat.$light-green-palette;
+$accent: mat.$lime-palette;
+$warn: mat.$deep-orange-palette;
 
 @mixin hover-theme() {
   $accent: mat.$lime-palette;
@@ -13,11 +13,13 @@
 }
 
 @mixin primary-background($hue-value: 100) {
-  $primary: mat.$light-green-palette;
   background-color: mat.get-color-from-palette($primary, $hue-value);
 }
 
 @mixin accent-background($hue-value: 100) {
-  $accent: mat.$lime-palette;
   background-color: mat.get-color-from-palette($accent, $hue-value);
+}
+
+@mixin warn-text-color($hue-value: 100) {
+  color: mat.get-color-from-palette($warn, $hue-value);
 }

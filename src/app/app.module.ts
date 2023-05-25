@@ -11,7 +11,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
-import { SmallDishDetailsComponent } from './shared/small-dish-details/small-dish-details.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -46,7 +45,6 @@ const materialModules = [
     LoginComponent,
     BaseLayoutComponent,
     AuthLayoutComponent,
-    SmallDishDetailsComponent,
     DishCheckBoxComponent,
     NumberRangeComponent,
   ],

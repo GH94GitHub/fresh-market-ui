@@ -1,6 +1,6 @@
 <form [formGroup]="userForm" (ngSubmit)="registerUser()">
 <div id="pageContainer">
-    <mat-stepper orientation="vertical" [linear]="false" #stepper ><!-- FIXME: Change [linear] back to true After development-->
+    <mat-stepper orientation="vertical" [linear]="true" #stepper ><!-- FIXME: Change [linear] back to true After development-->
       <!-- Step 1 -->
       <mat-step [stepControl]="userForm.controls['infoFormGroup']">
         <ng-template matStepLabel>Fill out your info</ng-template>
@@ -58,7 +58,7 @@
           </div>
           <br>
           <div fxLayoutAlign="end">
-            <button mat-raised-button type="button" color="accent" (click)="showDishStep()" [disabled]="!userForm.controls['infoFormGroup'].valid">Next</button>
+            <button mat-raised-button type="button" color="accent" matStepperNext [disabled]="!userForm.controls['infoFormGroup'].valid">Next</button>
           </div>
         </div>
       </mat-step>
@@ -104,8 +104,9 @@
           </section>
 
             <div>
+              <p [ngStyle]="{ 'visibility': userForm.controls['dishesFormGroup'].valid? 'hidden': 'visible'}" class="error">Select {{ chosenTier.dishCount }} dishes or change the amount of dishes per week you would like.</p>
               <button type="button" mat-button matStepperPrevious>Back</button>
-              <button type="button" mat-raised-button color="accent" matStepperNext>Next</button>
+              <button type="button" mat-raised-button color="accent" [disabled]="!userForm.controls['dishesFormGroup'].valid" matStepperNext>Next</button>
             </div>
         </div>
       </mat-step>

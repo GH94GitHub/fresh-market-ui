@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { AllergyService } from 'src/app/shared/services/allergy/allergy.service';
 import { DishService } from 'src/app/shared/services/dish/dish.service';
@@ -7,6 +7,7 @@ import { Allergy, Dish, Tier, User } from 'src/app/types';
 import { DISH_CATEGORIES } from 'src/app/constants';
 import { UserApiService } from 'src/app/shared/services/user/user-api.service';
 import { TierService } from 'src/app/shared/services/tier/tier.service';
+import { exactCheckedCheckboxesValidator } from 'src/app/shared/form-validators/form-group/exact-checked-checkboxes.validator';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { TierService } from 'src/app/shared/services/tier/tier.service';
   templateUrl: './subscription-sign-up.component.html',
   styleUrls: ['./subscription-sign-up.component.scss']
 })
-export class SubscriptionSignUpComponent implements OnInit {
+export class SubscriptionSignUpComponent implements OnInit, AfterViewInit {
 
   // Aggregates all the forms from all steps
   userForm!: FormGroup;
@@ -37,55 +38,71 @@ export class SubscriptionSignUpComponent implements OnInit {
     private userApiService: UserApiService,
     private tierService: TierService,
     ) {}
+  ngAfterViewInit(): void {
+    this.stepper.selectionChange.subscribe(value => {
+      if(value.selectedIndex===1) {
+        this.showDishStep();
+      }
+    });
+  }
 
   ngOnInit() {
-    // Init forms
+    this.initUserForm(); // Initialize the user form
+    this.addDishFormControls(); // Add dish form controls dynamically
+    this.loadTiers(); // Load tiers
+    this.loadAllergies(); // Load allergies
+  }
+
+  private initUserForm() {
     this.userForm = this.fb.group({
       infoFormGroup: this.fb.group({
-        name: ['', Validators.required],
-        address: ['', Validators.required],
-        phoneNumber: [''],
-        allergies: ['']
+        name: ['', Validators.required], // Name field with required validator
+        address: ['', Validators.required], // Address field with required validator
+        phoneNumber: [''], // Phone number field
+        allergies: [''] // Allergies field
       }),
-      dishesFormGroup: this.fb.group({}),
+      dishesFormGroup: this.fb.group({controls: {}}), // Empty group for dishes form controls
       credentialsFormGroup: this.fb.group({
-        email: ['', Validators.compose([Validators.required, Validators.email])],
-        password: ['', Validators.required]
+        email: ['', Validators.compose([Validators.required, Validators.email])], // Email field with required and email validators
+        password: ['', Validators.required] // Password field with required validator
       }),
     });
+  }
 
-    // Add Dish form controls
-    this.dishService.getAll().subscribe((r: Dish[]) => {
-      for(let dish of r) {
-        (this.userForm.controls['dishesFormGroup'] as FormGroup).addControl(dish.name + '-' + dish.dishId, new FormControl(''));
+  private addDishFormControls() {
+    this.dishService.getAll().subscribe((dishes: Dish[]) => {
+      this.dishes = dishes;
+      const dishesFormGroup = this.userForm.get('dishesFormGroup') as FormGroup;
+      for (const dish of dishes) {
+        dishesFormGroup.addControl(dish.name + '-' + dish.dishId, new FormControl(false)); // Add dish form control dynamically
       }
-      this.dishes=r;
     });
+  }
 
-    this.tierService.getAll().subscribe((r: Tier[]) => {
-      this.tiers = r;
-      this.chosenTier = r[0];
+  private loadTiers() {
+    this.tierService.getAll().subscribe((tiers: Tier[]) => {
+      this.tiers = tiers;
+      this.changeMealsPW(tiers[1].dishCount);
     });
+  }
 
-    // Allergies dropdown
-    this.allergyService.getAllergies().subscribe((r: Allergy[]) => {
-      this.allergies=r;
+  private loadAllergies() {
+    this.allergyService.getAllergies().subscribe((allergies: Allergy[]) => {
+      this.allergies = allergies; // Load allergies
     });
-
-    // this.userForm.controls['infoFormGroup'].get('name').err
   }
 
   /* When user advances to step 2 (Select Dishes) this method should filter the dish
   ** options that conflict with the users allergies and remove them from being chosen
   */
   showDishStep() {
-    const userAllergies: string[] = (this.userForm.controls['infoFormGroup'] as FormGroup).controls['allergies'].value;
+    const userAllergies: any = (this.userForm.controls['infoFormGroup'] as FormGroup).controls['allergies'].value;
     let allergicDishes: Dish[] = [];
 
-    for(let userAllergy of userAllergies) {
+    for(const userAllergy of userAllergies) {
       allergicDishes = allergicDishes.concat(
         this.dishes.filter((dish: Dish) => {
-          return dish.allergies.filter((allergy: Allergy) => allergy.name===userAllergy).length>0
+          return dish.allergies.filter((allergy: Allergy) => allergy.name===userAllergy.name).length>0
         })
       );
     };
@@ -93,13 +110,13 @@ export class SubscriptionSignUpComponent implements OnInit {
     // Disable dishes for which user has an allergy
     (this.userForm.controls['dishesFormGroup'] as FormGroup).enable();
     allergicDishes.forEach((allergicDish: Dish) => {
-      let dishCheckBox: FormControl = (this.userForm.controls['dishesFormGroup'] as FormGroup).controls[allergicDish.name+allergicDish.dishId] as FormControl;
+      let dishCheckBox: FormControl = (this.userForm.controls['dishesFormGroup'] as FormGroup).controls[`${allergicDish.name}-${allergicDish.dishId}`] as FormControl;
       if(!dishCheckBox.disabled) {
         dishCheckBox.disable({ onlySelf: true });
       }
     });
-    // Go to next step
-    this.stepper.next();
+    // // Go to next step
+    // this.stepper.next();
   }
 
   // Used to construct custom component
@@ -111,9 +128,9 @@ export class SubscriptionSignUpComponent implements OnInit {
     return this.dishes.filter(d => d.category==category);
   }
 
-  // Toggle dish option that cooresponds to data
+  // Toggle dish option that corresponds to data
   checkDishToggle(data: [boolean, Dish]) {
-    (this.userForm.controls['dishesFormGroup'] as FormGroup).controls[data[1].name+data[1].dishId].setValue(!data[0]);
+    (this.userForm.controls['dishesFormGroup'] as FormGroup).controls[`${data[1].name}-${data[1].dishId}`].setValue(!data[0]);
   }
 
   // Fired when serving amount is changed
@@ -127,6 +144,11 @@ export class SubscriptionSignUpComponent implements OnInit {
 
     if(tier) {
       this.chosenTier = tier;
+
+      const dishesFormGroup: FormGroup = this.userForm.get('dishesFormGroup') as FormGroup;
+      dishesFormGroup.clearValidators(); // Remove old Validators
+      dishesFormGroup.addValidators(exactCheckedCheckboxesValidator(this.chosenTier.dishCount)); // Add new Validator
+      dishesFormGroup.updateValueAndValidity();
     } else {
       console.error("Chosen tier doesn't exist");
     }
