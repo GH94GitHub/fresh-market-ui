@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { AllergyService } from 'src/app/shared/services/allergy/allergy.service';
 import { DishService } from 'src/app/shared/services/dish/dish.service';
@@ -56,14 +56,14 @@ export class SubscriptionSignUpComponent implements OnInit, AfterViewInit {
   private initUserForm() {
     this.userForm = this.fb.group({
       infoFormGroup: this.fb.group({
-        name: ['', Validators.required], // Name field with required validator
+        name: ['', [Validators.required, Validators.pattern(/^\s*\w+\s*,\s*\w+\s*$/)]], // Name field with required validator
         address: ['', Validators.required], // Address field with required validator
         phoneNumber: [''], // Phone number field
         allergies: [''] // Allergies field
       }),
       dishesFormGroup: this.fb.group({controls: {}}), // Empty group for dishes form controls
       credentialsFormGroup: this.fb.group({
-        email: ['', Validators.compose([Validators.required, Validators.email])], // Email field with required and email validators
+        email: ['', [Validators.required, Validators.email]], // Email field with required and email validators
         password: ['', Validators.required] // Password field with required validator
       }),
     });
@@ -115,8 +115,6 @@ export class SubscriptionSignUpComponent implements OnInit, AfterViewInit {
         dishCheckBox.disable({ onlySelf: true });
       }
     });
-    // // Go to next step
-    // this.stepper.next();
   }
 
   // Used to construct custom component
@@ -175,7 +173,7 @@ export class SubscriptionSignUpComponent implements OnInit, AfterViewInit {
     // Parse dishesFormGroup
     const dishesForm = this.userForm.controls['dishesFormGroup'];
     const dishesKeyValues = {
-      dishPreferences: undefined, // TODO: dishArray
+      dishPreferences: this.getDishPreferences(),
       familySize: this.familySizeMultiplier,
       subscription: undefined,// TODO: Parse subscription
     }
@@ -193,6 +191,22 @@ export class SubscriptionSignUpComponent implements OnInit, AfterViewInit {
       ...credentialsKeyValues,
     }
     return user;
+  }
+
+  private getDishPreferences(): Dish[] {
+    const dishesFormGroup: FormGroup = this.userForm.controls['dishesFormGroup'] as FormGroup;
+
+    return Object.entries(dishesFormGroup.controls)
+      .filter((data => {
+        return data[1].value === true;
+      }))
+      .map(data => data[0].split('-').pop())
+      .map(dishId => {
+        if(!dishId)
+          throw "DishMismatchException";
+        return this.dishes.find(dish => dish.dishId === parseInt(dishId))!
+      });
+
   }
 
 }

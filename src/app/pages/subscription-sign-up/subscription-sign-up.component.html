@@ -1,6 +1,6 @@
 <form [formGroup]="userForm" (ngSubmit)="registerUser()">
 <div id="pageContainer">
-    <mat-stepper orientation="vertical" [linear]="true" #stepper ><!-- FIXME: Change [linear] back to true After development-->
+    <mat-stepper orientation="vertical" [linear]="true" #stepper >
       <!-- Step 1 -->
       <mat-step [stepControl]="userForm.controls['infoFormGroup']">
         <ng-template matStepLabel>Fill out your info</ng-template>
@@ -17,6 +17,7 @@
                 required
               />
               <mat-error *ngIf="userForm.controls['infoFormGroup'].get('name')!.errors?.['required']">Name is required</mat-error>
+              <mat-error *ngIf="userForm.controls['infoFormGroup'].get('name')!.errors?.['pattern']">Please enter your Last name then First name separated by a comma (",")</mat-error>
             </mat-form-field>
             <!-- <br/> -->
 
