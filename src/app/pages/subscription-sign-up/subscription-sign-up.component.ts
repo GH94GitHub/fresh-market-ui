@@ -58,7 +58,7 @@ export class SubscriptionSignUpComponent implements OnInit, AfterViewInit {
       infoFormGroup: this.fb.group({
         name: ['', [Validators.required, Validators.pattern(/^\s*\w+\s*,\s*\w+\s*$/)]], // Name field with required validator
         address: ['', Validators.required], // Address field with required validator
-        phoneNumber: [''], // Phone number field
+        phoneNumber: ['', Validators.pattern(/^\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$/)], // Phone number field
         allergies: [''] // Allergies field
       }),
       dishesFormGroup: this.fb.group({controls: {}}), // Empty group for dishes form controls
@@ -166,7 +166,7 @@ export class SubscriptionSignUpComponent implements OnInit, AfterViewInit {
       firstName: USER_NAME.split(',')[1].trim(),
       lastName: USER_NAME.split(',')[0].trim(),
       address: infoForm.get('address')!.value,
-      phoneNumber: infoForm.get('phoneNumber')!.value,
+      phoneNumber: (infoForm.get('phoneNumber')!.value as string).match(/\d+/g)?.join(''),
       allergies: infoForm.get('allergies')!.value,
     }
 

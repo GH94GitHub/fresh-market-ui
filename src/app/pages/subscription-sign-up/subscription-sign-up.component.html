@@ -43,6 +43,7 @@
                 formControlName="phoneNumber"
               />
               <mat-error *ngIf="userForm.controls['infoFormGroup'].get('phoneNumber')!.errors?.['required']">Phone Number is required</mat-error>
+              <mat-error *ngIf="userForm.controls['infoFormGroup'].get('phoneNumber')!.errors?.['pattern']">Please enter in valid phone number format</mat-error>
             </mat-form-field>
 
             <!-- Allergies -->
