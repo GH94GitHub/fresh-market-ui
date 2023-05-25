@@ -17,14 +17,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { SelectnumbersComponent } from './shared/components/selectnumbers/selectnumbers.component';
-import { NumberOptionComponent } from './shared/components/selectnumbers/number-option/number-option.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DishCheckBoxComponent } from './shared/components/dish-check-box/dish-check-box.component';
+import { NumberRangeComponent } from './shared/components/number-range/number-range.component';
 
 const materialModules = [
   MatIconModule,
@@ -48,9 +47,8 @@ const materialModules = [
     BaseLayoutComponent,
     AuthLayoutComponent,
     SmallDishDetailsComponent,
-    SelectnumbersComponent,
-    NumberOptionComponent,
     DishCheckBoxComponent,
+    NumberRangeComponent,
   ],
   imports: [
     BrowserModule,
